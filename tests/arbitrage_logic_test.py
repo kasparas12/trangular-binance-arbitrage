@@ -8,6 +8,14 @@ def test_find_all_triangular_pairs_should_find_one_pair():
     
     assert len(result) == 1
     
+def test_find_all_triangular_pairs_should_find_two_pairs():
+    input_pairs = [Pair(baseAsset="BTC", quoteAsset="ETH"), Pair(baseAsset="ETH", quoteAsset="LTC"), Pair(baseAsset="BTC", quoteAsset="LTC"),
+                   Pair(baseAsset="ETH", quoteAsset="BTC"), Pair(baseAsset="LTC", quoteAsset="ETH"), Pair(baseAsset="LTC", quoteAsset="BTC")]
+    
+    result = find_all_triangular_pairs(input_pairs)
+    
+    assert len(result) == 2
+    
 def test_find_all_triangular_pairs_should_find_zero_pairs():
     input_pairs = [Pair(baseAsset="BTC", quoteAsset="ETH"), Pair(baseAsset="ETH", quoteAsset="LTC"), Pair(baseAsset="BNB", quoteAsset="LTC")]
     

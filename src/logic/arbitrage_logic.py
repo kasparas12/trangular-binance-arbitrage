@@ -1,8 +1,21 @@
 from models.pair import Pair
 
-def find_all_triangular_pairs(pairs: list[Pair]) -> list[list[Pair]]:
-    print('Finding triangualr pairs...')
+def transform_triangular_pair_to_dict(pair: list[Pair]) -> dict:
+    return {
+        'a_base': pair[0].baseAsset,
+        'b_base': pair[1].baseAsset,
+        'c_base': pair[2].baseAsset,
+        'a_quote': pair[0].quoteAsset,
+        'b_quote': pair[1].quoteAsset,
+        'c_quote': pair[2].quoteAsset,
+        'pair': f"{pair[0].baseAsset}{pair[0].quoteAsset}_{pair[1].baseAsset}{pair[1].quoteAsset}_{pair[2].baseAsset}{pair[2].quoteAsset}"
+    }
     
+def transform_dict_to_triangular_pair(pair: dict) -> list[Pair]:
+    return [Pair(baseAsset=pair["a_base"], quoteAsset=pair["a_quote"]), Pair(baseAsset=pair["b_base"], quoteAsset=pair["b_quote"]), Pair(baseAsset=pair["c_base"], quoteAsset=pair["c_quote"])]
+
+def find_all_triangular_pairs(pairs: list[Pair]) -> list[list[Pair]]:
+        
     found_pairs: list[list[Pair]] = []
     for firstPair in pairs:
         for secondPair in pairs:
