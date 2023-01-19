@@ -5,6 +5,7 @@ from integrations.binance import get_binance_tradeable_pairs, get_binance_book_t
 from logic.arbitrage_logic import find_all_triangular_pairs, calculate_surface_rate
 from constants.constants import TRIANGULAR_PAIRS_SAVE_FILE_PATH
 from models.pair import TriangularPair
+import time
 
 '''Getting all pairs from Binance and finding triangular pairs'''
 '''Might take 7-8 minutes to fully run'''
@@ -29,8 +30,10 @@ def step2():
         
         prices = get_binance_book_tickers()
         
-        for pair in triangualr_pairs:
-            calculate_surface_rate(pair, prices)
+        while True:
+            for pair in triangualr_pairs:
+                rate = calculate_surface_rate(pair, prices)
+                time.sleep(0.5)
 
 
 if __name__ == "__main__":
